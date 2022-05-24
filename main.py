@@ -21,7 +21,7 @@
 # to change the font family. But you can resize the characters
 # and any minor editing can be done using the glyph browser.
 # Only Tamil and English characters are allowed. If you have
-# other non-unicode font texts, you will have convert and
+# other non-unicode font texts, you will have to convert and
 # add them separately. Non-Tamil unicode text is passed through
 # the program without conversion. All the formatting in the
 # original text is also lost during clip and paste. So, you
@@ -36,7 +36,7 @@
 # inside the section belwo in this program. Tested up to 20-page
 # MS Word Akshar or Vijaya font documents. Google Tamil fonts
 # do not work, since they do not depend entirely on psts substitution
-# rules in the GSUB table. They use more open-type features. Good luck!
+# rules in the GPOS table. They use more open-type features. Good luck!
 #
 # Chakravathy Mathiazhagan, IIT Madras.
 #

@@ -1,8 +1,16 @@
-# A simple Python script for converting unicode Tamil
-# characters to glyph format suitable for pasting in
+# A simple Python script for converting opentype unicode-based
+# Tamil characters to glyph format suitable for pasting in
 # Affinity programs. You will have to reformat all the
 # text in Affinity after pasting the clipboard and toggling
 # to unicode.
+# Usage: copy paste truetype Tamil text in upper windows,
+# press convert, press copy to converted format to clipboard
+# press clear to clear both screens and the clipboard.
+#
+# Easiest way to copy converted data is: open a new Text box,
+# press 'cmd v' to paste inside, 'cmd a' to select all,
+# ctrl u to toggle to unicode, and then change font to the
+# correct one.
 
 from tkinter import *
 import sys
@@ -21,7 +29,7 @@ finalDisp = ""  # global final display return value
 
 # enter the language ttf font below!
 # strip and save a temp xml file with only GSUB and cmap tables for the font
-font2 = TTFont("akshar.ttf")
+font2 = TTFont("vijaya.ttf")
 font2.saveXML("temp.xml", tables=["GSUB", "cmap"])
 
 
@@ -35,7 +43,7 @@ debug = False
 # Other languages like Hindi or Telugu depend heavily on GSUB rules
 # and may not work correctly!
 
-langID = "taml"  # latest form of Tamil, skip the archaic form taml
+langID = "tml2"  # latest form of Tamil, skip the archaic form taml
 langID2 = "taml"  # backup name if the first is not found
 prepChar = ["0xbc6", "0xbc7", "0xbc8"]  # single append preposition chars list கெ கே கை
 prep2Char = ["0xbca", "0xbcb", "0xbcc"]  # double append preposition chars list கொ கோ கௌ
@@ -82,23 +90,25 @@ for c in root.iter('FeatureRecord'):
             lookuplistindex = e.get("index")
             lookuplistval = e.get("value")
             lookuplist.append([featurerecordindex, featuretag, lookuplistindex, lookuplistval])
-print(lookuplist)
+#print(lookuplist)
 
 lkList = []  # linked list
 for j in range(0, len(featlist)):
     if langID == featlist[j][1]:  # check first if tml2 is found
         # print(j)
         lkList.append(featlist[j][3])
+        print("default language found =", langID)
         continue
     elif langID2 == featlist[j][1]:  # check it the other archaic form taml is found
         # print(j)
         lkList.append(featlist[j][3])
+        print("also language found old", langID2)
         continue
     else:
-        print('selected font file is not in correct language!')
+        print('selected font file has other languages! =', featlist[j][1])
         #quit()
 
-print("lkList =", lkList)
+print("Feature table index: lkList =", lkList)
 
 # now get link list of lookup tables to use in correct order
 llList = []
@@ -107,7 +117,7 @@ for j in range(0, len(lookuplist)):
         if lookuplist[j][0] == lkList[k]:
             llList.append(lookuplist[j][3])
             continue
-print("llList =", llList)
+print("Lookup table index: llList =", llList)
 
 # get char substitution list here, easier to work with glyph ID, so get glyph ID
 j = 0
@@ -131,7 +141,7 @@ if not debug:
                         j = j + 1
                 continue  # get substitute list in correct order
 
-    print("number of substitutions in the font file =", j)
+    print("number of substitutions to be applied in the selected language =", j)
     #print(substList)
 
 if debug:
@@ -155,10 +165,10 @@ if debug:
                         substList.append([(forglyph),
                                           (substcomp),(substglyph)])
                         if (forglyph == 'u0BA9'):
-                            print("forglygph = ", [(forglyph),
+                            print("forglyph = ", [(forglyph),
                                           (substcomp),(substglyph)])
                         j = j + 1
-                #continue  # get substitute list in correct order
+                continue  # get substitute list in correct order
 
     print("number of substitutions to be made =", j)
     print(substList)
@@ -171,10 +181,10 @@ for Map in root.iter('map'):
     glyphName = str(Map.get('name'))
     cmapList.append([mapCode, glyphName])
     k = k + 1
-print("number of glyphs in cmap=", k)
+print("total number of all glyphs in cmap=", k)
 #print(cmapList)
 
-# initialize psts substitution glpyID data
+# initialize some variables
 l = 0
 ll = 0
 
@@ -184,7 +194,7 @@ for l in range(0, len(prepChar)):
         if prepChar[l] == cmapList[ll][0]:
             prepglyID[l] = font2.getGlyphID(cmapList[ll][1])
             continue
-print("pre-position one char char glyph IDs = ", prepglyID)  # like கெ கே கை
+#print("pre-position one c char glyph IDs = ", prepglyID)  # like கெ கே கை
 
 # assume that they must be in the unicode fonts!
 for l in range(0, len(prep2Char)):
@@ -192,7 +202,7 @@ for l in range(0, len(prep2Char)):
         if prep2Char[l] == cmapList[ll][0]:
             prep2glyID[l] = font2.getGlyphID(cmapList[ll][1])
             continue
-print("pre-position two char glyph IDs = ", prep2glyID)  # கொ கோ கௌ
+#print("pre-position two char glyph IDs = ", prep2glyID)  # கொ கோ கௌ
 
 # assume that they must be in the unicode fonts!
 for l in range(0, len(preapp2Char)):
@@ -200,7 +210,7 @@ for l in range(0, len(preapp2Char)):
         if preapp2Char[l] == cmapList[ll][0]:
             preapp2glyID[l] = font2.getGlyphID(cmapList[ll][1])
             continue
-print("pre-append two char glyph IDs = ", preapp2glyID)  # like the ள after கௌ
+#print("pre-append two char glyph IDs = ", preapp2glyID)  # like the ள after கௌ
 
 # assume that they must be in the unicode fonts!
 for l in range(0, len(post2Char)):
@@ -208,7 +218,7 @@ for l in range(0, len(post2Char)):
         if post2Char[l] == cmapList[ll][0]:
             post2glyID[l] = font2.getGlyphID(cmapList[ll][1])
             continue
-print("post-append char glyph IDs = ", post2glyID)
+#print("post-append char glyph IDs = ", post2glyID)
 
 # print(substList)
 # print(cmapList)
@@ -225,6 +235,7 @@ clipboard.copy(
     "test chars \n mathi தமிழ் மொழி Mathiazhagan \n லக்‌ஷமி லக்‌ஷ்மி கை ச"
     "ித்து மெ விகடவீ ஶ்ரீ க்‌ஷ் மொ கை வெ றா சிந்து")
 clipText = clipboard.paste()  # text will have the content of clipboard
+# sanskrit characters like ஶ்ரீ or க்‌ஷ need level 3 substitution not implemented here.
 
 # print available fonts
 # print(tk_font.families())
@@ -302,7 +313,6 @@ def retrieve_input():
         elif not uniRange[0] <= ord(inputValue[ii]) <= uniRange[1]:  # unicode range correct?
             charAppend = "u+" + inputchar.replace("0x", "")
             finalDisp = finalDisp + charAppend  # append before exiting ii loop
-            #level2 = True
             continue
 
         # get glyIDs for four consecutive chars

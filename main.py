@@ -34,7 +34,9 @@
 # since it depends on GPOS data, and not GSUB. But otherwise it's fine.
 # For other Indic you will have to change some of the data
 # inside the section belwo in this program. Tested up to 20-page
-# MS Word Akshar or Vijaya font documents.
+# MS Word Akshar or Vijaya font documents. Google Tamil fonts
+# do not work, since they do not depend entirely on psts substitution
+# rules in the GSUB table. They use more features.
 #
 
 

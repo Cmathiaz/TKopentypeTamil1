@@ -11,6 +11,24 @@
 # press 'cmd v' to paste inside, 'cmd a' to select all,
 # ctrl u to toggle to unicode, and then change font to the
 # correct one.
+#
+# known problems: only level 1 substitution is ready and so
+# it does not display some sanskrit characters like sri or
+# ksha. Also 'vi' in Latha font does not correctly in Affinity
+#
+# Note that copied text inside Affinity is not font
+# characters, but glyph characters. So, you won't be able
+# to change the font family. But you can resize the characters
+# and any minor editing can be done using the glyph browser.
+# Only Tamil and English characters are allowed. If you have
+# other non-unicode font texts, you will have convert and
+# add them separately. Non-Tamil unicode text is passed through
+# the program without conversion. All the formatting in the
+# original text is also lost during clip and paste. So, you
+# will have to reformat the text after pasting in Affinity.
+# Some unicode-based opentype may not display correctly if
+# they do not have all the glyph encoded in the GSUB list.
+
 
 from tkinter import *
 import sys

@@ -28,6 +28,11 @@
 # will have to reformat the text after pasting in Affinity.
 # Some unicode-based opentype may not display correctly if
 # they do not have all the glyph encoded in the GSUB list.
+# Fonts like Vijaya, Akshar, TAU-encoded Tamil fonts work
+# well. In Latha font, chars like 'vi' does not display correctly
+# since it depends on GPOS data. But otherwise they fine.
+# For other Indic you will have to change some of the data
+# inside this program.
 
 
 from tkinter import *

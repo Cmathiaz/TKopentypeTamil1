@@ -36,7 +36,7 @@
 # inside the section belwo in this program. Tested up to 20-page
 # MS Word Akshar or Vijaya font documents. Google Tamil fonts
 # do not work, since they do not depend entirely on psts substitution
-# rules in the GPOS table. They use more open-type features. Good luck!
+# rules in the GSUB table. They use more open-type features. Good luck!
 #
 # Chakravathy Mathiazhagan, IIT Madras.
 #

@@ -3,12 +3,12 @@
 # Affinity programs. You will have to reformat all the
 # text in Affinity after pasting the clipboard and toggling
 # to unicode.
-# Usage: copy paste truetype Tamil text in upper windows,
-# press convert, press copy to converted format to clipboard
+# Usage: select and copy-paste true-type Tamil text in the upper
+# window, press convert, press copy to converted format to clipboard
 # press clear to clear both screens and the clipboard.
 #
-# Easiest way to copy converted data is: open a new Text box,
-# press 'cmd v' to paste inside, 'cmd a' to select all,
+# Easiest way to copy the converted data is: open a new Text box
+# in Affinity, press 'cmd v' to paste inside, 'cmd a' to select all,
 # ctrl u to toggle to unicode, and then change font to the
 # correct one.
 #

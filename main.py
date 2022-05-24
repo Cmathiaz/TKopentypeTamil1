@@ -3,8 +3,8 @@
 # Affinity programs. You will have to reformat all the
 # text in Affinity after pasting the clipboard and toggling
 # to unicode.
-# Usage: select and copy-paste true-type Tamil text in the upper
-# window, press convert, press copy to converted format to clipboard
+# Usage: select and copy-paste true-type Tamil text in the upper window,
+# press convert, press copy to copy converted format to clipboard
 # press clear to clear both screens and the clipboard.
 #
 # Easiest way to copy the converted data is: open a new Text box
@@ -13,8 +13,8 @@
 # correct one.
 #
 # known problems: only level 1 substitution is ready and so
-# it does not display some sanskrit characters like sri or
-# ksha. Also 'vi' in Latha font does not correctly in Affinity
+# it does not display some sanskrit characters like sri or ksha.
+# Also char 'vi' in Latha font does not display correctly in Affinity.
 #
 # Note that copied text inside Affinity is not font
 # characters, but glyph characters. So, you won't be able
@@ -28,11 +28,14 @@
 # will have to reformat the text after pasting in Affinity.
 # Some unicode-based opentype may not display correctly if
 # they do not have all the glyph encoded in the GSUB list.
-# Fonts like Vijaya, Akshar, TAU-encoded Tamil fonts work
-# well. In Latha font, chars like 'vi' does not display correctly
-# since it depends on GPOS data. But otherwise they fine.
+# Fonts like Vijaya, Akshar, TAU-encoded Tamil fonts, and many
+# more work well.
+# In Latha font, chars like 'vi' does not display correctly
+# since it depends on GPOS data, and not GSUB. But otherwise it's fine.
 # For other Indic you will have to change some of the data
-# inside this program.
+# inside the section belwo in this program. Tested up to 20-page
+# MS Word Akshar or Vijaya font documents.
+#
 
 
 from tkinter import *
@@ -52,7 +55,7 @@ finalDisp = ""  # global final display return value
 
 # enter the language ttf font below!
 # strip and save a temp xml file with only GSUB and cmap tables for the font
-font2 = TTFont("vijaya.ttf")
+font2 = TTFont("akshar.ttf")
 font2.saveXML("temp.xml", tables=["GSUB", "cmap"])
 
 
@@ -61,10 +64,10 @@ debug = False
 # ------------------------------------------------------
 # glyph IDs for pre-position/pre-base chars for Tamil, like in கெ கே கை கொ கோ கௌ
 # This list is for Tamil only!
-# These char lists must be changed for other languages!
+# These unicode char lists must be changed for other languages!
 # Please port it for other languages too!
 # Other languages like Hindi or Telugu depend heavily on GSUB rules
-# and may not work correctly!
+# and may not work correctly in this GSUB based program!
 
 langID = "tml2"  # latest form of Tamil, skip the archaic form taml
 langID2 = "taml"  # backup name if the first is not found
@@ -76,7 +79,6 @@ prepglyID = [0, 0, 0]  # pre-position glyph ID list initialization
 prep2glyID = [0, 0, 0]  # second pre-position glyph ID list initialization
 preapp2glyID = [0, 0, 0]  # pre-append glyph ID list initialization
 post2glyID = [0, 0, 0]  # post-append glyph ID list initialization
-archChar = [0xbbe]  # bypass subst rules for this archaic forms; we now use only றா, ணா, னா
 uniRange = [0x0b80, 0x0bff]  # unicode range for the Tamil language
 # -----------------------------------------------------
 

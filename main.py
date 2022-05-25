@@ -5,7 +5,7 @@
 # to unicode. The app converts the Tamil unicode text to
 # a string of glyph data that can be displayed inside
 # Affinity apps. This works only for certain unicode-based open
-# type fonts. the script reads the .ttf file, extracts the cmap and
+# type fonts. The script reads the .ttf file, extracts the cmap and
 # GSUB lookup tables and saves them in a temporary .xml file
 # for use. If the opentype .ttf font file contains all the
 # necessary glyphs for Tamil and if they all are also indexed in
@@ -38,8 +38,13 @@
 # they do not have all the glyph encoded in the GSUB list.
 # Fonts like Vijaya, Akshar, TAU-encoded Tamil fonts, and many
 # more work well.
+#
 # In Latha font, chars like 'vi' does not display correctly
-# since it depends on GPOS data, and not GSUB. But otherwise it's fine.
+# since it depends on GPOS data, and not GSUB. The glyph for this
+# character 'vi is not inside .ttf file, and it has to be rendered
+# using GPOS table by the Affinity app. It does so somewhat imperfectly,
+# but otherwise it's fine.
+#
 # For other Indic you will have to change some of the data
 # inside the section belwo in this program. Tested up to 20-page
 # MS Word Akshar or Vijaya font documents. Google Tamil fonts

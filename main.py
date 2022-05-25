@@ -2,7 +2,15 @@
 # Tamil characters to glyph format suitable for pasting in
 # Affinity programs. You will have to reformat all the
 # text in Affinity after pasting the clipboard and toggling
-# to unicode.
+# to unicode. The app converts the Tamil unicode text to
+# a string of glyph data that can be displayed inside
+# Affinity apps. This works only for certain unicode-based open
+# type fonts. the script reads the .ttf file, extracts the cmap and
+# GSUB lookup tables and saves them in a temporary .xml file
+# for use. If the opentype .ttf font file contains all the
+# necessary glyphs for Tamil and if they all are also indexed in
+# GSUB lookup tables, this Python program script will work!
+#
 # Usage: select and copy-paste true-type Tamil text in the upper window,
 # press convert, press copy to copy converted format to clipboard
 # press clear to clear both screens and the clipboard.

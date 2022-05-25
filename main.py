@@ -83,7 +83,7 @@ debug = False
 # This list is for Tamil only!
 # These unicode char lists must be changed for other languages!
 # Please port it for other languages too!
-# Other languages like Hindi or Telugu depend heavily on GSUB rules
+# Other languages like Hindi or Telugu depend heavily on GPOS rules
 # and may not work correctly in this GSUB based program!
 
 langID = "tml2"  # latest form of Tamil, skip the archaic form taml

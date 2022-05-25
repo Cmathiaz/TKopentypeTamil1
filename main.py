@@ -285,7 +285,7 @@ def clear_all():
     global finalDisp
     global clipText
     finalDisp = ""
-    clipboard.copy(finalDisp)  # now the clipboard content will be string "abc"
+    clipboard.copy(finalDisp)  # now the clipboard content will be the above string
     clipText = clipboard.paste()  # text will have the content of clipboard
     textBox.delete("1.0", END)  # clear text boxes
     textBox2.delete("1.0", END)

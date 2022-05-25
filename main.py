@@ -108,7 +108,7 @@ tree = ET.parse('temp.xml')
 # the xml document
 root = tree.getroot()
 
-# read other link data from the xml font file
+# read other link and subst data from the xml font file
 substList = []  # final psts and substitution data
 
 # first get feature list
@@ -141,7 +141,7 @@ for j in range(0, len(featlist)):
         lkList.append(featlist[j][3])
         print("default language found =", langID)
         continue
-    elif langID2 == featlist[j][1]:  # check it the other archaic form taml is found
+    elif langID2 == featlist[j][1]:  # check if the other archaic form taml is found
         # print(j)
         lkList.append(featlist[j][3])
         print("also language found old", langID2)

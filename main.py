@@ -5,7 +5,7 @@
 # to unicode. The app converts the Tamil unicode text to
 # a string of glyph data that can be displayed inside
 # Affinity apps. This works only for certain unicode-based open
-# type fonts. the script reads the .ttf file, extracts the cmap and
+# type fonts. The script reads the .ttf file, extracts the cmap and
 # GSUB lookup tables and saves them in a temporary .xml file
 # for use. If the opentype .ttf font file contains all the
 # necessary glyphs for Tamil and if they all are also indexed in

@@ -319,7 +319,7 @@ def retrieve_input():
 
     charAppend = ""  # char append variable
 
-    for ii in range(0, len(inputValue) - 3):  # skip last 4 padded spaces
+    for ii in range(0, len(inputValue) - 3):  # skip last 3 padded spaces
 
         # bypass 2 chars for double substitution, etc.
         if level2:

@@ -235,7 +235,7 @@ for l in range(0, len(prepChar)):
         if prepChar[l] == cmapList[ll][0]:
             prepglyID[l] = font2.getGlyphID(cmapList[ll][1])
             continue
-#print("pre-position one c char glyph IDs = ", prepglyID)  # like கெ கே கை
+#print("pre-position one char glyph IDs = ", prepglyID)  # like கெ கே கை
 
 # assume that they must be in the unicode fonts!
 for l in range(0, len(prep2Char)):
@@ -273,8 +273,7 @@ myFont = font.Font(family='Helvetica')
 
 # copy some sample text into clipboard for testing the program
 clipboard.copy(
-    "test chars \n mathi தமிழ் மொழி Mathiazhagan \n லக்‌ஷமி லக்‌ஷ்மி கை ச"
-    "ித்து மெ விகடவீ ஶ்ரீ க்‌ஷ் மொ கை வெ றா சிந்து")
+    "test chars \n mathi தமிழ் மொழி Mathiazhagan \n லக்‌ஷமி லக்‌ஷ்மி கை சித்து மெ விகடவீ ஶ்ரீ க்‌ஷ் மொ கை வெ றா சிந்து")
 clipText = clipboard.paste()  # text will have the content of clipboard
 # sanskrit characters like ஶ்ரீ or க்‌ஷ need level 3 substitution not implemented here.
 

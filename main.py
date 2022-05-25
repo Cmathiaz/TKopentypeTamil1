@@ -163,7 +163,6 @@ print("Lookup table index: llList =", llList)
 
 # get char substitution list here, easier to work with glyph ID, so get glyph ID
 j = 0
-substList = []
 
 if not debug:
 

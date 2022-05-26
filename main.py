@@ -72,7 +72,7 @@ import xml.etree.ElementTree as ET
 
 finalDisp = ""  # global final display return value
 
-# enter the language ttf font below!
+# enter the language .ttf or .ttc font file below!
 # strip and save a temp xml file with only GSUB and cmap tables for the font
 
 font2 = TTFont("akshar.ttf", fontNumber=0)

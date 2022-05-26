@@ -72,11 +72,13 @@ finalDisp = ""  # global final display return value
 
 # enter the language ttf font below!
 # strip and save a temp xml file with only GSUB and cmap tables for the font
-font2 = TTFont("akshar.ttf")
+
+font2 = TTFont("akshar.ttf", fontNumber=0)
 font2.saveXML("temp.xml", tables=["GSUB", "cmap"])
 
-
 debug = False
+defaultLang1 = False
+defaultLang2 = False
 
 # ------------------------------------------------------
 # glyph IDs for pre-position/pre-base chars for Tamil, like in கெ கே கை கொ கோ கௌ
@@ -86,7 +88,7 @@ debug = False
 # Other languages like Hindi or Telugu depend heavily on GPOS rules
 # and may not work correctly in this GSUB based program!
 
-langID = "tml2"  # latest form of Tamil, skip the archaic form taml
+langID = "tml2"  # latest form of Tamil, skip the archaic form tml2
 langID2 = "taml"  # backup name if the first is not found
 prepChar = ["0xbc6", "0xbc7", "0xbc8"]  # single append preposition chars list கெ கே கை
 prep2Char = ["0xbca", "0xbcb", "0xbcc"]  # double append preposition chars list கொ கோ கௌ
@@ -121,7 +123,7 @@ for c in root.iter('ScriptRecord'):
             featindex = e.get("index")
             featvalue = e.get("value")
             featlist.append([scriptrecord, scripttag, featindex, featvalue])
-print(featlist)
+#print(featlist)
 
 lookuplist = []  # list of lookup indices
 for c in root.iter('FeatureRecord'):
@@ -134,21 +136,35 @@ for c in root.iter('FeatureRecord'):
             lookuplist.append([featurerecordindex, featuretag, lookuplistindex, lookuplistval])
 #print(lookuplist)
 
-lkList = []  # linked list
+# check which version of tml2 or taml is present
+# search whole list first
 for j in range(0, len(featlist)):
     if langID == featlist[j][1]:  # check first if tml2 is found
-        # print(j)
-        lkList.append(featlist[j][3])
-        print("default language found =", langID)
-        continue
-    elif langID2 == featlist[j][1]:  # check if the other archaic form taml is found
-        # print(j)
-        lkList.append(featlist[j][3])
-        print("also language found old", langID2)
-        continue
-    else:
-        print('selected font file has other languages! =', featlist[j][1])
-        #quit()
+        defaultLang1 = True
+    if langID2 == featlist[j][1]:  # check first if tml2 is found
+        defaultLang2 = True
+
+#print(defaultLang1, defaultLang2)
+
+lkList = []  # linked list
+
+if defaultLang1:
+    # print("got to 1st language")
+    for j in range(0, len(featlist)):
+        if langID == featlist[j][1]:  # check first if tml2 is found
+            lkList.append(featlist[j][3])
+            print("default language found =", langID)
+    # else:
+    #     print('selected font file has other languages! =', featlist[j][1])
+    #     #quit()
+
+elif defaultLang2:
+    # print("got to 2nd language")
+    for j in range(0, len(featlist)):
+        if langID2 == featlist[j][1]:  # check if the other archaic form taml is found
+                lkList.append(featlist[j][3])
+                print("language found is old", langID2)
+
 
 print("Feature table index: lkList =", lkList)
 
@@ -205,7 +221,7 @@ if debug:
                         #print(forglyph, substcomp, substglyph)
                         substList.append([(forglyph),
                                           (substcomp),(substglyph)])
-                        if (forglyph == 'u0BA9'):
+                        if (forglyph == 'tgc_ta'):
                             print("forglyph = ", [(forglyph),
                                           (substcomp),(substglyph)])
                         j = j + 1
@@ -213,6 +229,7 @@ if debug:
 
     print("number of substitutions to be made =", j)
     print(substList)
+    quit()
 
 k = 0
 cmapList = []
@@ -421,25 +438,29 @@ def retrieve_input():
                 # this section may not work well! Not fully tested!
                 if len(nextComp) > 0:  # check if next char component has one or two values
                     if len(nextComp) >= 1:  # has one value
-                        if (glyID2) == int(nextComp[0]):
-                            #print("subst level 2")
+                        if glyID2 == int(nextComp[0]):
+                            # print("subst level 2")
                             charAppend = "g+" + str(hex(substList[ijk][2])).replace("0x", "")
                             level2 = True
+                            if len(nextComp) >= 2:  # has one value
+                                level3 = True
 
-                            # code below does not work well, commented out!
-                            # if len(nextComp) >= 2:  # has two values
-                            #     # clean up 2nd component
-                            #     nextComp[1] = nextComp[1].replace("", "")
-                            #     if glyID3 == int(nextComp[1]):  # skip ZWNJ or ZWJ
-                            #         print("got to subst level 3")
-                            #         charAppend = "g+" + str(hex(substList[ijk][2])).replace("0x", "")
-                            #         print(nextComp, charAppend)
-                            #         finalDisp = finalDisp + charAppend
-                            #         #print(finalDisp)
-                            #
-                            #         #level4 = True
-                            #         level3 = True
-                            #         continue
+                                # # code below does not work well, commented out!
+                                # if len(nextComp) >= 2:  # has two values
+                                #     # clean up 2nd component
+                                #     nextComp[1] = nextComp[1].replace("", "")
+                                #     if glyID4 == int(nextComp[1]):  # skip ZWNJ or ZWJ
+                                #         print("got to subst level 3")
+                                #         charAppend = str(hex(substList[ijk][2])).replace("0x", "")
+                                #         charAppend = charAppend[:-1]
+                                #         charAppend = "g+" + charAppend
+                                #         # charAppend = "g+" + str(hex(substList[ijk][2])).replace("0x", "")
+                                #         print(nextComp, charAppend)
+                                #         finalDisp = finalDisp + charAppend
+                                #          #print(finalDisp)
+                                #         level4 = True
+                                #         level3 = True
+                                #         continue
 
 
         finalDisp = finalDisp + charAppend

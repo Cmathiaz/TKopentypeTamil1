@@ -54,6 +54,8 @@
 # Chakravathy Mathiazhagan, IIT Madras.
 #
 
+# update 26 May -- added support for .ttc font collection files
+# fixed a bug that happens when both taml and tml2 versions are present
 
 from tkinter import *
 import sys

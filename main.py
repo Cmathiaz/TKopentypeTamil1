@@ -75,7 +75,7 @@ finalDisp = ""  # global final display return value
 # enter the language .ttf or .ttc font file below!
 # strip and save a temp xml file with only GSUB and cmap tables for the font
 
-font2 = TTFont("NotoSerifTamil-Regular.ttf", fontNumber=0)
+font2 = TTFont("akshar.ttf", fontNumber=0)
 font2.saveXML("temp.xml", tables=["GSUB", "cmap"])
 
 debug = False

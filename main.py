@@ -75,7 +75,7 @@ finalDisp = ""  # global final display return value
 # enter the language .ttf or .ttc font file below!
 # strip and save a temp xml file with only GSUB and cmap tables for the font
 
-font2 = TTFont("akshar.ttf", fontNumber=0)
+font2 = TTFont("NotoSerifTamil-Regular.ttf", fontNumber=0)
 font2.saveXML("temp.xml", tables=["GSUB", "cmap"])
 
 debug = False
@@ -439,7 +439,7 @@ def retrieve_input():
 
                 # this section may not work well! Not fully tested!
                 if len(nextComp) > 0:  # check if next char component has one or two values
-                    if len(nextComp) >= 1:  # has one value
+                    if len(nextComp) == 1:  # has one value
                         if glyID2 == int(nextComp[0]):
                             # print("subst level 2")
                             charAppend = "g+" + str(hex(substList[ijk][2])).replace("0x", "")

@@ -20,7 +20,7 @@
 # ctrl u to toggle to unicode, and then change font to the
 # correct one.
 #
-# known problems: only level 1 substitution is ready and so
+# known problems: only level 2 substitution is ready and so
 # it does not display some sanskrit characters like sri or ksha.
 # Also char 'vi' in Latha font does not display correctly in Affinity.
 #
@@ -88,8 +88,8 @@ defaultLang2 = False
 # This list is for Tamil only!
 # These unicode char lists must be changed for other languages!
 # Please port it for other languages too!
-# Other languages like Hindi or Telugu depend heavily on GPOS rules
-# and may not work correctly in this GSUB based program!
+# Other languages like Hindi or Telugu depend heavily on GPOS rules, and
+# 2nd pass chaining and so, may not work correctly in this simple GSUB based program!
 
 langID = "tml2"  # latest form of Tamil, skip the archaic form tml2
 langID2 = "taml"  # backup name if the first is not found

@@ -110,7 +110,7 @@ print(font2.keys())
 GSUBfound = False
 for c in font2.keys():
     if c == 'GSUB':
-        print ("GSUB found in the entered font file")
+        print("GSUB found in the entered font file")
         GSUBfound = True
 
 if not GSUBfound:

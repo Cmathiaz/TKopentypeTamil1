@@ -54,8 +54,9 @@
 # Chakravathy Mathiazhagan, IIT Madras.
 #
 
-# update 26 May -- added support for .ttc font collection files
+# update 26 May 2022 -- added support for .ttc font collection files
 # fixed a bug that happens when both taml and tml2 versions are present
+# update 27 May 2022 -- added checking for GSUB table in font file
 
 from tkinter import *
 import sys
@@ -104,6 +105,18 @@ uniRange = [0x0b80, 0x0bff]  # unicode range for the Tamil language
 # -----------------------------------------------------
 
 print(font2.keys())
+
+# check if GSUB is found
+GSUBfound = False
+for c in font2.keys():
+    if c == 'GSUB':
+        print ("GSUB found in the entered font file")
+        GSUBfound = True
+
+if not GSUBfound:
+    print("GSUB not found in font file, quitting!")
+    quit()
+
 
 # parse xml tree
 tree = ET.parse('temp.xml')
